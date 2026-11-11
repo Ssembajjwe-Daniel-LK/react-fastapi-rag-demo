@@ -1,0 +1,148 @@
+/* ------------------------------------------------------------------ */
+/* Farben: hier zentral ändern (z. B. auf die Firmenfarben)            */
+/* ------------------------------------------------------------------ */
+:root {
+  /* Firmenfarben (Einschätzung - durch exakte Hex-Werte aus dem Logo ersetzen) */
+  --brand: #0f2a4a;       /* Dunkelblau: Kopfzeile                    */
+  --brand-ink: #ffffff;   /* Weiß: Text auf Dunkelblau                */
+  --accent: #c8102e;      /* Rot: Button, Akzentlinien, Seitenzahl    */
+  --accent-ink: #ffffff;  /* Weiß: Text auf Rot                       */
+  --accent-text: #c8102e; /* Rot als Schriftfarbe (Seitenzahl)        */
+
+  --bg: #f1f3f6;          /* Seitenhintergrund                        */
+  --surface: #ffffff;     /* Karten, Eingabefeld                      */
+  --ink: #14202e;         /* Haupttext                                */
+  --muted: #5a6878;       /* Nebentext (Pfade, Hinweise)              */
+  --line: #d4dae2;        /* Rahmen                                   */
+  --focus: #0f2a4a;       /* Fokusrahmen (Blau, damit nicht wie Fehler) */
+  --context-bg: #f7f8fa;
+  --error: #b54708;       /* Orange statt Rot, weil Rot jetzt Markenfarbe ist */
+
+  --radius: 6px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand: #0b1f38;
+    --accent-text: #ff8a98; /* helleres Rot für Schrift auf dunklem Grund */
+    --bg: #0e1826;
+    --surface: #16263a;
+    --ink: #e6ebf1;
+    --muted: #97a6b8;
+    --line: #26384f;
+    --focus: #ffffff;
+    --context-bg: #122033;
+    --error: #f79009;
+  }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+/* ------------------------------------------------------------------ */
+/* Layout                                                              */
+/* ------------------------------------------------------------------ */
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.header {
+  background: var(--brand);
+  color: var(--brand-ink);
+  border-bottom: 4px solid var(--accent);
+  padding: 1.5rem 1.25rem;
+}
+.header-inner { max-width: 820px; margin: 0 auto; }
+.header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+.header p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* Suchleiste */
+.search {
+  display: flex;
+  gap: 0.5rem;
+}
+.search input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.search input:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.search button {
+  padding: 0 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.search button:hover:not(:disabled) { filter: brightness(1.1); }
+.search button:disabled { opacity: 0.6; cursor: wait; }
+.search button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Meldungen */
+.error { color: var(--error); margin-top: 1rem; }
+.empty { color: var(--muted); margin-top: 1rem; }
+
+/* Ergebnisse */
+.results h2 {
+  margin: 2.25rem 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.sources {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.sources li {
+  padding: 0.65rem 1rem;
+  border-top: 1px solid var(--line);
+}
+.sources li:first-child { border-top: none; }
+.sources .file { font-weight: 600; }
+.sources .page { color: var(--accent-text); margin-left: 0.5rem; }
+.sources .path {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.context {
+  margin: 0;
+  padding: 1rem;
+  white-space: pre-wrap;
+  font-family: Consolas, "Cascadia Mono", monospace;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  background: var(--context-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  max-height: 60vh;
+  overflow: auto;
+}
