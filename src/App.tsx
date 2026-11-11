@@ -42,7 +42,7 @@ export default function App() {
     <header className="header">
       <div className="header-inner">
         <h1>Wissen Assistant</h1>
-        <p>Technische Unterlagen durchsuchen – per Frage oder direkt per Code.</p>
+        <p>Unterlagen durchsuchen – per Frage oder direkt per Code.</p>
       </div>
     </header>
     <main className="page">
